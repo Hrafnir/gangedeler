@@ -2,48 +2,48 @@
 <html lang="no">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Den Visuelle Mattemaskinen - Interaktiv</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Den Visuelle Mattemaskinen - iPad-vennlig</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <h1>Den Visuelle Mattemaskinen</h1>
-        <p>Dra objektene for å løse oppgaven selv!</p>
+        <p>Trykk på en kule, så på en boks – eller dra og slipp!</p>
     </header>
 
     <main>
         <section id="controls">
             <div class="input-group">
-                <label for="input-a">Hvor mange totalt?</label>
+                <label for="input-a">Antall kuler:</label>
                 <input type="number" id="input-a" value="12" min="1" max="30">
             </div>
 
             <div class="input-group">
-                <label for="input-b">Del på (antall esker):</label>
+                <label for="input-b">Antall bokser:</label>
                 <input type="number" id="input-b" value="3" min="1" max="6">
             </div>
 
-            <button id="btn-setup">Klargjør Oppgave</button>
-            <button id="btn-reset">Nullstill</button>
+            <button id="btn-setup">Lag ny oppgave</button>
+            <button id="btn-reset">Nullstill alt</button>
         </section>
 
         <div id="learning-grid">
             <section id="visualization-area">
                 <div id="source-zone">
-                    <h3>Haug med objekter</h3>
+                    <h3>Kilde (Hvor mange skal deles?)</h3>
                     <div id="source-container"></div>
                 </div>
                 
                 <div id="target-zone">
-                    <h3>Fordel her</h3>
+                    <h3>Mottakere (Bokser)</h3>
                     <div id="target-containers"></div>
                 </div>
             </section>
 
             <section id="math-board">
-                <h3>Regnestykket</h3>
+                <h3>Regne-tavle</h3>
                 <div id="algorithm-display">
                     <div class="equation-line">
                         <span id="display-a">0</span> : <span id="display-b">0</span> = <span id="display-result">?</span>
@@ -51,15 +51,17 @@
                     <div id="work-steps">
                         </div>
                 </div>
+                <div class="board-actions">
+                    <button id="btn-update-step" class="action-btn">Før opp på tavla</button>
+                </div>
             </section>
         </div>
 
         <section id="status-display">
-            <p id="instruction-text">Klikk "Klargjør Oppgave" for å begynne.</p>
+            <p id="instruction-text">Velg kuler og fordel dem i boksene slik du vil.</p>
         </section>
 
         <section id="gui-log-container">
-            <h3>Hendelseslogg (System):</h3>
             <div id="gui-log"></div>
         </section>
     </main>
