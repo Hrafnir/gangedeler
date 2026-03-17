@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Den Visuelle Mattemaskinen - Lær Ganging og Deling</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Den Visuelle Mattemaskinen</h1>
+        <p>Se hvordan tallene fordeler seg!</p>
+    </header>
+
+    <main>
+        <section id="controls">
+            <div class="input-group">
+                <label for="input-a">Tall 1 (Mengde):</label>
+                <input type="number" id="input-a" value="10" min="1" max="50">
+            </div>
+
+            <div class="input-group">
+                <label for="operation">Handling:</label>
+                <select id="operation">
+                    <option value="multiply">Ganger med (x)</option>
+                    <option value="divide">Delt på (/)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="input-b">Tall 2 (Grupper):</label>
+                <input type="number" id="input-b" value="2" min="1" max="10">
+            </div>
+
+            <button id="btn-start">Start Visualisering</button>
+            <button id="btn-reset">Nullstill</button>
+        </section>
+
+        <hr>
+
+        <section id="status-display">
+            <p id="instruction-text">Velg tall og trykk start for å se hva som skjer.</p>
+        </section>
+
+        <section id="visualization-area">
+            <div id="source-container" title="Startmengde"></div>
+            <div id="target-containers" title="Mottakere"></div>
+        </section>
+
+        <section id="gui-log-container">
+            <h3>Hendelseslogg (System):</h3>
+            <div id="gui-log"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Programmerer V2 - Pedagogisk Verktøy v1.0</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
