@@ -1,86 +1,85 @@
-/* Version: #2 */
+/* Version: #3 */
 
 :root {
     --primary-color: #4a90e2;
     --secondary-color: #f5a623;
-    --bg-color: #f0f4f8;
-    --text-color: #333;
-    --box-border: #ccd6dd;
-    --success-color: #7ed321;
-    --paper-color: #fff;
-    --grid-line: #e0e7ff;
+    --bg-color: #f8fafc;
+    --text-color: #1e293b;
+    --box-border: #cbd5e1;
+    --success-color: #10b981;
+    --paper-color: #ffffff;
+    --grid-line: #f1f5f9;
+    --selection-color: #3b82f6;
+}
+
+/* Forhindre tekst-markering når man tapper raskt på iPad */
+* {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    padding: 20px;
+    padding: 10px; /* Litt mindre padding for mer skjermplass */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-header { text-align: center; margin-bottom: 20px; }
-
 /* === KONTROLLPANEL === */
 #controls {
     background: white;
-    padding: 15px 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     display: flex;
-    gap: 20px;
+    gap: 15px;
     flex-wrap: wrap;
-    align-items: flex-end;
     justify-content: center;
-    width: 100%;
-    max-width: 900px;
+    width: 95%;
+    max-width: 1000px;
     margin-bottom: 20px;
 }
 
-.input-group { display: flex; flex-direction: column; gap: 5px; }
-input, button { padding: 10px; border-radius: 6px; border: 1px solid var(--box-border); font-size: 1rem; }
-button { cursor: pointer; background-color: var(--primary-color); color: white; font-weight: bold; border: none; }
-#btn-reset { background-color: #999; }
+.input-group { display: flex; flex-direction: column; gap: 4px; }
+input { padding: 12px; border-radius: 8px; border: 2px solid var(--box-border); font-size: 1.1rem; width: 80px; }
+button { padding: 12px 20px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+
+#btn-setup { background-color: var(--primary-color); color: white; }
+#btn-reset { background-color: #64748b; color: white; }
 
 /* === HOVED-LAYOUT === */
 #learning-grid {
     display: grid;
-    grid-template-columns: 1fr 350px;
-    gap: 20px;
-    width: 100%;
-    max-width: 1100px;
-    margin-bottom: 20px;
+    grid-template-columns: 1fr 320px;
+    gap: 15px;
+    width: 98%;
+    max-width: 1200px;
 }
 
 /* === VISUALISERINGSOMRÅDE === */
 #visualization-area {
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
     display: flex;
     flex-direction: column;
-    gap: 30px;
-}
-
-#source-zone, #target-zone {
-    border: 1px solid #eee;
-    padding: 15px;
-    border-radius: 8px;
+    gap: 20px;
 }
 
 #source-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    min-height: 80px;
-    background: #f9f9f9;
-    padding: 15px;
-    border-radius: 6px;
-    border: 2px dashed #ccc;
+    gap: 12px;
+    min-height: 100px;
+    background: #f1f5f9;
+    padding: 20px;
+    border-radius: 12px;
+    border: 3px dashed #cbd5e1;
 }
 
 #target-containers {
@@ -91,79 +90,101 @@ button { cursor: pointer; background-color: var(--primary-color); color: white; 
 }
 
 .target-box {
-    width: 100px;
-    min-height: 100px;
-    border: 3px solid var(--secondary-color);
-    border-radius: 10px;
-    background-color: #fff9f0;
-    transition: transform 0.2s, background-color 0.2s;
-    padding: 10px;
+    width: 110px; /* Større for iPad */
+    min-height: 110px;
+    border: 4px solid var(--secondary-color);
+    border-radius: 14px;
+    background-color: #fffbeb;
+    padding: 12px;
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 6px;
     align-content: flex-start;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
-/* Visuell feedback ved dragging */
 .target-box.drag-over {
-    background-color: #ffe0b2;
-    transform: scale(1.05);
-    border-style: dashed;
+    background-color: #fef3c7;
+    transform: scale(1.08);
 }
 
-/* === MATTE-OBJEKTET === */
+/* === MATTE-OBJEKTET (Eplet/Kula) === */
 .math-object {
-    width: 30px;
-    height: 30px;
-    background-color: #ff5e5e;
+    width: 36px; /* Større for touch */
+    height: 36px;
+    background-color: #ef4444;
     border-radius: 50%;
-    cursor: grab;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    touch-action: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2);
+    border: 2px solid rgba(0,0,0,0.1);
+    transition: transform 0.2s;
 }
 
-.math-object:active { cursor: grabbing; }
+/* Markering ved valg */
+.math-object.selected {
+    outline: 4px solid var(--selection-color);
+    outline-offset: 2px;
+    transform: scale(1.2);
+    animation: pulse 1.5s infinite;
+    z-index: 10;
+}
 
-/* === MATTE-TAVLE (ALGORITME) === */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* === MATTE-TAVLE === */
 #math-board {
     background-color: var(--paper-color);
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    border-left: 5px solid #4a90e2;
-    background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
-    background-size: 20px 20px;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    border-top: 8px solid var(--primary-color);
+    background-image: linear-gradient(var(--grid-line) 1.5px, transparent 1.5px), 
+                      linear-gradient(90deg, var(--grid-line) 1.5px, transparent 1.5px);
+    background-size: 25px 25px;
+    display: flex;
+    flex-direction: column;
 }
 
 .equation-line {
     font-size: 1.8rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #333;
+    font-family: 'Courier New', monospace;
+    font-weight: 800;
+    margin-bottom: 15px;
+    border-bottom: 3px solid #1e293b;
+    padding-bottom: 5px;
 }
 
 #work-steps {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.4rem;
-    line-height: 1.5;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    overflow-y: auto;
+    flex-grow: 1;
 }
 
-.step-subtraction {
-    color: #d00;
-    text-decoration: underline;
+.board-actions { margin-top: 15px; }
+.action-btn {
+    width: 100%;
+    background-color: var(--success-color);
+    color: white;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 0px #065f46;
+}
+.action-btn:active { transform: translateY(2px); box-shadow: 0 2px 0px #065f46; }
+
+/* === LOGG === */
+#gui-log {
+    height: 60px;
+    background: #1e293b;
+    color: #4ade80;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    margin-top: 15px;
 }
 
-.step-result {
-    color: var(--success-color);
-    font-weight: bold;
-}
-
-/* === LOGG OG STATUS === */
-#status-display { text-align: center; margin-bottom: 10px; font-weight: bold; color: var(--primary-color); }
-
-#gui-log-container { width: 100%; max-width: 1100px; }
-#gui-log { height: 80px; overflow-y: auto; background: #333; color: #0f0; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.8rem; }
-
-/* Version: #2 */
+/* Version: #3 */
