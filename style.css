@@ -1,6 +1,5 @@
-/* Version: #1 */
+/* Version: #2 */
 
-/* === GRUNNLEGGENDE STIL === */
 :root {
     --primary-color: #4a90e2;
     --secondary-color: #f5a623;
@@ -8,6 +7,8 @@
     --text-color: #333;
     --box-border: #ccd6dd;
     --success-color: #7ed321;
+    --paper-color: #fff;
+    --grid-line: #e0e7ff;
 }
 
 body {
@@ -21,15 +22,12 @@ body {
     align-items: center;
 }
 
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
+header { text-align: center; margin-bottom: 20px; }
 
 /* === KONTROLLPANEL === */
 #controls {
     background: white;
-    padding: 20px;
+    padding: 15px 25px;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     display: flex;
@@ -38,148 +36,134 @@ header {
     align-items: flex-end;
     justify-content: center;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
+    margin-bottom: 20px;
 }
 
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+.input-group { display: flex; flex-direction: column; gap: 5px; }
+input, button { padding: 10px; border-radius: 6px; border: 1px solid var(--box-border); font-size: 1rem; }
+button { cursor: pointer; background-color: var(--primary-color); color: white; font-weight: bold; border: none; }
+#btn-reset { background-color: #999; }
 
-input, select, button {
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid var(--box-border);
-    font-size: 1rem;
-}
-
-button {
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bold;
-    border: none;
-    transition: transform 0.1s, background-color 0.2s;
-}
-
-button:hover {
-    background-color: #357abd;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-#btn-reset {
-    background-color: #999;
-}
-
-/* === STATUS OG INFO === */
-#status-display {
-    margin: 20px 0;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    text-align: center;
-    min-height: 1.5em;
+/* === HOVED-LAYOUT === */
+#learning-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 20px;
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 20px;
 }
 
 /* === VISUALISERINGSOMRÅDE === */
 #visualization-area {
-    width: 100%;
-    max-width: 1000px;
-    min-height: 400px;
     background: white;
     border-radius: 12px;
     padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
     gap: 30px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* Container for alle start-elementer (epler/baller) */
+#source-zone, #target-zone {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+}
+
 #source-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: center;
+    min-height: 80px;
+    background: #f9f9f9;
     padding: 15px;
-    border: 2px dashed var(--box-border);
-    border-radius: 8px;
-    min-height: 60px;
+    border-radius: 6px;
+    border: 2px dashed #ccc;
 }
 
-/* Container for målene (kasser/personer) */
 #target-containers {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
     justify-content: center;
 }
 
 .target-box {
-    width: 120px;
-    min-height: 120px;
+    width: 100px;
+    min-height: 100px;
     border: 3px solid var(--secondary-color);
     border-radius: 10px;
+    background-color: #fff9f0;
+    transition: transform 0.2s, background-color 0.2s;
+    padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-start;
     gap: 5px;
-    padding: 10px;
-    background-color: #fff9f0;
-    position: relative;
+    align-content: flex-start;
 }
 
-.target-box::after {
-    content: attr(data-count);
-    position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
+/* Visuell feedback ved dragging */
+.target-box.drag-over {
+    background-color: #ffe0b2;
+    transform: scale(1.05);
+    border-style: dashed;
+}
+
+/* === MATTE-OBJEKTET === */
+.math-object {
+    width: 30px;
+    height: 30px;
+    background-color: #ff5e5e;
+    border-radius: 50%;
+    cursor: grab;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    touch-action: none;
+}
+
+.math-object:active { cursor: grabbing; }
+
+/* === MATTE-TAVLE (ALGORITME) === */
+#math-board {
+    background-color: var(--paper-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-left: 5px solid #4a90e2;
+    background-image: radial-gradient(var(--grid-line) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.equation-line {
+    font-size: 1.8rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+}
+
+#work-steps {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.4rem;
+    line-height: 1.5;
+}
+
+.step-subtraction {
+    color: #d00;
+    text-decoration: underline;
+}
+
+.step-result {
+    color: var(--success-color);
     font-weight: bold;
 }
 
-/* Selve matte-objektet (f.eks. eplet) */
-.math-object {
-    width: 25px;
-    height: 25px;
-    background-color: #ff5e5e;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* === LOGG OG STATUS === */
+#status-display { text-align: center; margin-bottom: 10px; font-weight: bold; color: var(--primary-color); }
 
-/* === LOGG I GUI === */
-#gui-log-container {
-    width: 100%;
-    max-width: 800px;
-    margin-top: 30px;
-    font-size: 0.85rem;
-}
+#gui-log-container { width: 100%; max-width: 1100px; }
+#gui-log { height: 80px; overflow-y: auto; background: #333; color: #0f0; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 0.8rem; }
 
-#gui-log {
-    height: 100px;
-    overflow-y: auto;
-    background: #333;
-    color: #0f0;
-    padding: 10px;
-    border-radius: 4px;
-    font-family: monospace;
-}
-
-.log-entry { margin-bottom: 2px; }
-.log-entry.info { color: #fff; }
-.log-entry.success { color: #7ed321; }
-
-/* === ANIMASJON === */
-@keyframes popIn {
-    0% { transform: scale(0); }
-    100% { transform: scale(1); }
-}
-
-.pop { animation: popIn 0.3s ease-out forwards; }
-
-/* Version: #1 */
+/* Version: #2 */
